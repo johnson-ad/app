@@ -21,6 +21,21 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    // #[Route('/Produit/add', name: 'produit_add')]
+    // public function add(Request $request): Response
+    // {
+    //     $p = new Produit();
+    //     $form = $this->createForm(ProduitType::class, $p);
+    //     $form->handleRequest($request);
+    //     if ($form->isSubmitted() &&  $form->isValid()) {
+    //         $p = $form->getData();
+    //         $en = $this->getDoctrine()->getManager();
+    //         $en->persist($p);
+    //         $en->flush();
+    //     }
+    //     return $this->redirectToRoute('produit_liste');
+    // }
+
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProduitRepository $produitRepository): Response
     {
@@ -69,7 +84,7 @@ class ProduitController extends AbstractController
     #[Route('/{id}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, ProduitRepository $produitRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$produit->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $produit->getId(), $request->request->get('_token'))) {
             $produitRepository->remove($produit, true);
         }
 
